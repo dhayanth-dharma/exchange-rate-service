@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
+
 @RestController
 @RequestMapping("/api/currency-converter")
 @Api(value = "CURRENCY_CONVERTER", description = "CURRENCY CONVERTER CONTROLLER")
@@ -39,8 +41,9 @@ public class CurrencyConverterController {
             try{
                 Double convertedAmount=currencyConverterService.
                         convertCurrency(sourceCurrency,targetCurrency,amount);
+
                 return (convertedAmount!=null)?
-                        new ResponseEntity(convertedAmount,HttpStatus.OK):
+                        new ResponseEntity(String.format("%.2f", convertedAmount),HttpStatus.OK):
                         new ResponseEntity("Currency data not available",HttpStatus.BAD_REQUEST);
             }catch (Exception e){
                 return new ResponseEntity("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -39,7 +39,7 @@ public class ExchangeRateController {
             try{
                 Double currencyValue=currencyExchangeService.getEuroExchangeRatePair(currency);
                 return (currencyValue!=null)?
-                        new ResponseEntity(String.format("1 %s / %s Euro",currency.toUpperCase(),currencyValue.toString()), HttpStatus.OK):
+                        new ResponseEntity(String.format("1 %s / %s Euro",currency.toUpperCase(),String.format("%.2f", currencyValue)), HttpStatus.OK):
                         new ResponseEntity("Currency data not available",HttpStatus.BAD_REQUEST);
             }catch (Exception e){
                 return new ResponseEntity("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -68,7 +68,7 @@ public class ExchangeRateController {
                 Double currencyTwoAmount=currencyExchangeService.getExchangeRatePair(currencyOne,currencyTwo);
                 return (currencyTwoAmount!=null)?
                         new ResponseEntity(String.format("1 %s / %s %s",
-                                currencyOne.toUpperCase(),currencyTwoAmount.toString(), currencyTwo.toUpperCase()), HttpStatus.OK):
+                                currencyOne.toUpperCase(),String.format("%.2f", currencyTwoAmount), currencyTwo.toUpperCase()), HttpStatus.OK):
                         new ResponseEntity("Currency data not available",HttpStatus.BAD_REQUEST);
             }catch (Exception e){
                 return new ResponseEntity("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -62,7 +62,7 @@ public class CurrencyController {
                 Integer count=currencyService.getRequestCount(currency);
                 return (count!=null)?
                         new ResponseEntity(count,HttpStatus.OK):
-                        new ResponseEntity("Currency data not available",HttpStatus.BAD_REQUEST);
+                        new ResponseEntity("Currency data not available or not requested",HttpStatus.BAD_REQUEST);
             }catch (Exception e){
                 return new ResponseEntity("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
             }
